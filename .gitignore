@@ -1,0 +1,19 @@
+# Build
+/build
+/app/build
+.gradle/
+.kotlin/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# Local config & SECRETS (never commit)
+local.properties
+gradle.properties.local
+*.keystore
+*.jks
+
+# OS
+.DS_Store
