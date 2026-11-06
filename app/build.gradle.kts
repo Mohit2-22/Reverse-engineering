@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -6,6 +8,15 @@ plugins {
     id("com.google.dagger.hilt.android")
     id("org.jetbrains.kotlin.plugin.serialization")
 }
+
+// Read secrets from local.properties (gitignored). Falls back to gradle.properties
+// placeholders if not present, so the project still configures on a fresh clone.
+val localProps = Properties().apply {
+    val f = rootProject.file("local.properties")
+    if (f.exists()) f.inputStream().use { load(it) }
+}
+fun secret(key: String): String =
+    localProps.getProperty(key) ?: (project.findProperty(key) as String? ?: "")
 
 android {
     namespace = "com.fittrack.app"
@@ -19,9 +30,9 @@ android {
         versionName = "0.1.0"
         vectorDrawables { useSupportLibrary = true }
 
-        // Supabase config — fill these in (see local.properties / BuildConfig below)
-        buildConfigField("String", "SUPABASE_URL", "\"${project.findProperty("SUPABASE_URL") ?: ""}\"")
-        buildConfigField("String", "SUPABASE_ANON_KEY", "\"${project.findProperty("SUPABASE_ANON_KEY") ?: ""}\"")
+        // Supabase config — real values come from local.properties (gitignored)
+        buildConfigField("String", "SUPABASE_URL", "\"${secret("SUPABASE_URL")}\"")
+        buildConfigField("String", "SUPABASE_ANON_KEY", "\"${secret("SUPABASE_ANON_KEY")}\"")
     }
 
     buildTypes {

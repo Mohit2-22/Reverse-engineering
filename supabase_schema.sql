@@ -87,6 +87,19 @@ alter table kudos             enable row level security;
 alter table comments          enable row level security;
 alter table follows           enable row level security;
 
+-- Drop existing policies first so this script is safe to re-run (idempotent).
+drop policy if exists "profiles_read"   on profiles;
+drop policy if exists "profiles_update" on profiles;
+drop policy if exists "activities_own"  on activities;
+drop policy if exists "activities_followed_read" on activities;
+drop policy if exists "streams_own"     on activity_streams;
+drop policy if exists "kudos_read"      on kudos;
+drop policy if exists "kudos_write"     on kudos;
+drop policy if exists "comments_read"   on comments;
+drop policy if exists "comments_write"  on comments;
+drop policy if exists "follows_read"    on follows;
+drop policy if exists "follows_write"   on follows;
+
 -- Profiles: everyone can read; you can only edit your own
 create policy "profiles_read"   on profiles for select using (true);
 create policy "profiles_update" on profiles for update using (auth.uid() = id);
