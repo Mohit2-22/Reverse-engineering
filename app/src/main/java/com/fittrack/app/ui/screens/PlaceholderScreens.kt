@@ -32,5 +32,5 @@ private fun Placeholder(title: String, subtitle: String) {
 
 @Composable fun FeedScreen() = Placeholder("Feed", "Your activities will appear here (Sprint 4)")
 @Composable fun MapScreen() = Placeholder("Map", "Explore & routes (Sprint 3)")
-@Composable fun RecordScreen() = Placeholder("Record", "GPS workout recording (Sprint 2)")
 @Composable fun ProfileScreen() = Placeholder("Profile", "Your stats & settings (Sprint 4)")
+// RecordScreen now lives in ui/screens/record/RecordScreen.kt (real GPS recording)

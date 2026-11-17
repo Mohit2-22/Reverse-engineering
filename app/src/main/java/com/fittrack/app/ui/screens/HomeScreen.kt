@@ -12,6 +12,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.fittrack.app.ui.navigation.BottomTab
+import com.fittrack.app.ui.screens.record.RecordScreen
 
 /**
  * Home scaffold = single host with a bottom nav bar and a nested NavHost.
